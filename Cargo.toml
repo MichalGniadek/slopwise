@@ -1,6 +1,6 @@
-# Example: iroh-share is a simple Dioxus-based sharing app.
+# Example: Slopwise is a simple Dioxus-based sharing app.
 [package]
-name = "iroh-share"
+name = "slopwise"
 version = "0.1.0"
 edition = "2024"
 

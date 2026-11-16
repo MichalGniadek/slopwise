@@ -55,7 +55,7 @@ impl SyncEngine {
 
         // Create the iroh endpoint.
         let endpoint = Endpoint::builder(iroh::endpoint::presets::N0)
-            .alpns(vec![b"iroh-share-sync".to_vec()])
+            .alpns(vec![b"slopwise-sync".to_vec()])
             .secret_key(secret_key.clone())
             .bind()
             .await
@@ -146,7 +146,7 @@ impl SyncEngine {
         let node_address = own_addr_string(&self.endpoint);
         crate::qr::QrPayload {
             v: 1,
-            app: "iroh-share".to_string(),
+            app: "slopwise".to_string(),
             node_address,
         }
     }
@@ -194,7 +194,7 @@ impl SyncEngine {
         // Connect to the peer.
         let conn = self
             .endpoint
-            .connect(addr, b"iroh-share-sync")
+            .connect(addr, b"slopwise-sync")
             .await
             .map_err(|e| e.to_string())?;
 

@@ -1,0 +1,15 @@
+# Dioxus configuration, used by the dioxus-cli (`dx`) for the web build.
+[application]
+# The name of the application.
+name = "slopwise"
+# Build for the web by default, so `dx build` needs no extra flags.
+default_platform = "web"
+# Path the app is served from. `/slopwise/` matches a GitHub Pages project
+# site: https://<user>.github.io/slopwise/. Set this to "/" when hosting at
+# the domain root (user/org site or custom domain), and make sure it matches
+# the repository name when hosted under a subpath.
+base_path = "/slopwise/"
+
+[web.app]
+# Title shown in the browser tab.
+title = "Slopwise"

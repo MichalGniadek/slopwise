@@ -324,7 +324,7 @@ async fn connect_and_maintain(
 
     let addr: EndpointAddr = parse_node_address(node_address)?;
     let conn = endpoint
-        .connect(addr, b"iroh-share-sync")
+        .connect(addr, b"slopwise-sync")
         .await
         .map_err(|e| e.to_string())?;
 

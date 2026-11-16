@@ -6,7 +6,7 @@ use web_sys::{HtmlVideoElement, MediaStreamConstraints};
 /// QR code payload exchanged between devices.
 ///
 /// Matches the payload shape from SYNC_ENGINE_PLAN.md section 5:
-/// `{ "v": 1, "app": "iroh-share", "node_address": "..." }`
+/// `{ "v": 1, "app": "slopwise", "node_address": "..." }`
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct QrPayload {
     pub v: u8,
@@ -19,7 +19,7 @@ impl QrPayload {
     pub fn dummy() -> Self {
         QrPayload {
             v: 1,
-            app: "iroh-share".to_string(),
+            app: "slopwise".to_string(),
             node_address:
                 "iroh://02abc123def4567890@relay.iroh.network?relay=https://relay.iroh.network"
                     .to_string(),

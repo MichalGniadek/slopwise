@@ -1,6 +1,6 @@
 # Sync Architecture: iroh + Automerge + Dioxus
 
-**Project:** `iroh-share` (Dioxus, wasm target)
+**Project:** `slopwise` (Dioxus, wasm target)
 **Status:** Implemented but not yet working end-to-end. The code compiles (`cargo check --target wasm32-unknown-unknown`), but a review found critical bugs in the sync layer: a sync-protocol deadlock, local edits never reaching the engine doc, a hanging push path, and busy-loop background sync. See `SYNC_FIX_PLAN.md` for the issue inventory and fix phases.
 **Goal:** A local-first, peer-to-peer sync engine where local edits instantly update the UI and remote sync changes flow back into the same reactive signal.
 
@@ -63,7 +63,7 @@ A JSON object, serialized to a string and rendered as a QR code:
 ```json
 {
   "v": 1,
-  "app": "iroh-share",
+  "app": "slopwise",
   "node_address": "<iroh NodeAddress as string>"
 }
 ```
@@ -82,7 +82,7 @@ A JSON object, serialized to a string and rendered as a QR code:
 
 One `iroh::Endpoint` per device. Peers find each other by `NodeAddress` (EndpointId + relay URL + direct addresses), exchanged via QR code or via known-peer lists.
 
-- **ALPN:** `iroh-share-sync` (custom protocol for automerge sync).
+- **ALPN:** `slopwise-sync` (custom protocol for automerge sync).
 - Connections are bi-di QUIC streams. iroh handles hole punching + relay fallback automatically.
 - Since groups are tiny (<5), each device opens a direct stream to every known peer and runs the automerge sync protocol. No broadcast, no flooding, no topic management.
 
@@ -125,7 +125,7 @@ A background task runs on each device:
 
 1. Read `known_peers` from the local automerge doc (fall back to the localStorage registry for peers added before this was implemented).
 2. For each known peer that isn't currently connected:
-   - Dial the peer's `node_address` over iroh (`Endpoint::connect(addr, alpn="iroh-share-sync")`).
+   - Dial the peer's `node_address` over iroh (`Endpoint::connect(addr, alpn="slopwise-sync")`).
    - Open a bi-di stream.
    - Run the automerge sync exchange until both sides are caught up.
 3. Keep **one persistent bi-di stream per connection** open for real-time bidirectional sync: both sides block on read, respond to incoming sync messages, and push new local changes on the same stream. Do **not** re-run the sync exchange in a tight loop or open a new stream per exchange — that busy-loops the wasm thread and spams streams.
@@ -265,7 +265,7 @@ This is the core UX. Let device **S** (scanner) scan device **P** (scanned / pee
 
 1. **P displays QR.** P's QR contains P's `node_address` (serialized `EndpointAddr`).
 2. **S scans P's QR.** S parses the payload: gets P's `NodeAddress`.
-3. **S dials P directly** over iroh (`Endpoint::connect(node_address, alpn="iroh-share-sync")`).
+3. **S dials P directly** over iroh (`Endpoint::connect(node_address, alpn="slopwise-sync")`).
 4. **Both devices run the automerge sync protocol** over a bi-di stream (`AutoCommit::sync()` → `SyncDoc`), exchanging only the changes needed to converge.
 5. **Both devices merge** the received changes into their local doc. Result: both devices now have a doc containing both groups' expenses, people, and `known_peers`. Conflicts resolve deterministically via automerge.
 6. **Both devices persist** the merged doc to localStorage.

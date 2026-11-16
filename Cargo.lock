@@ -2327,28 +2327,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "iroh-share"
-version = "0.1.0"
-dependencies = [
- "automerge",
- "base64 0.22.1",
- "console_error_panic_hook",
- "dioxus",
- "hex",
- "iroh",
- "js-sys",
- "n0-error",
- "qrcode",
- "serde",
- "serde_json",
- "tokio",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "zerocopy",
-]
-
-[[package]]
 name = "itertools"
 version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4150,6 +4128,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "debdd4b83524961983cea3c55383b3910fd2f24fd13a188f5b091d2d504a61ae"
 dependencies = [
  "rustc-hash 1.1.0",
+]
+
+[[package]]
+name = "slopwise"
+version = "0.1.0"
+dependencies = [
+ "automerge",
+ "base64 0.22.1",
+ "console_error_panic_hook",
+ "dioxus",
+ "hex",
+ "iroh",
+ "js-sys",
+ "n0-error",
+ "qrcode",
+ "serde",
+ "serde_json",
+ "tokio",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "zerocopy",
 ]
 
 [[package]]
