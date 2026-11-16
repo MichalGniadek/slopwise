@@ -1,0 +1,43 @@
+# Example: iroh-share is a simple Dioxus-based sharing app.
+[package]
+name = "iroh-share"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web"] }
+tokio = { version = "1", default-features = false, features = ["sync", "macros"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+console_error_panic_hook = "0.1"
+web-sys = { version = "0.3", features = [
+    "Window",
+    "MediaQueryList",
+    "Document",
+    "HtmlElement",
+    "DomTokenList",
+    "Storage",
+    "MediaDevices",
+    "Navigator",
+    "MediaStreamConstraints",
+    "MediaStream",
+    "MediaStreamTrack",
+    "HtmlVideoElement",
+    "HtmlCanvasElement",
+    "HtmlImageElement",
+    "CanvasRenderingContext2d",
+    "HtmlInputElement",
+    "FileReader",
+    "EventTarget",
+] }
+iroh = { version = "1.4.1", default-features = false, features = ["tls-ring"] }
+automerge = "0.12.0"
+serde_json = "1"
+js-sys = "0.3.107"
+qrcode = "0.13"
+serde = { version = "1", features = ["derive"] }
+hex = "0.4"
+base64 = "0.22"
+n0-error = "1.0"
+zerocopy = "0.8"
+
