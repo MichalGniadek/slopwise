@@ -780,7 +780,7 @@ fn App() -> Element {
         div { class: "app",
             style { {include_str!("styles.css")} }
             script { src: "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" }
-            h1 { "SlopShare" }
+            h1 { "SlopWise" }
             div { class: "theme-controls",
                 button {
                     class: "theme-toggle",
@@ -922,7 +922,7 @@ fn App() -> Element {
                                         let _ = storage.remove_item("iroh_share_known_peers");
                                         let _ = storage.remove_item("iroh_share_group_doc");
                                         let _ = storage.remove_item("iroh_share_sync_states");
-                                        let _ = storage.remove_item("slopshare_data");
+                                        let _ = storage.remove_item("slopwise_data");
                                     }
                                 }
                                 if let Some(win) = web_sys::window() {
