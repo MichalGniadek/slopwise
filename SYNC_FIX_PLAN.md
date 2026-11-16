@@ -53,7 +53,7 @@ All five phases are implemented and `cargo check --target wasm32-unknown-unknown
 |---|---|---|---|
 | m1 | `set_status` writes localStorage on every transition (Connecting/Connected/Synced/Disconnected). | `peers.rs:125-132` | Persist only on add/remove, not on status changes. |
 | m2 | `run_automerge_sync` sets the UI signal on every round even when nothing changed. | `automerge_sync.rs:80` | Only set the signal when the doc actually changed (compare heads). |
-| m3 | Debug "Clear All Data" removes unused keys (`iroh_share_actor_id`, `splitshare_data`) but not `iroh_share_group_doc` / `iroh_share_known_peers`. | `main.rs:806-818` | Remove the real keys. |
+| m3 | Debug "Clear All Data" removes unused keys (`iroh_share_actor_id`, `slopshare_data`) but not `iroh_share_group_doc` / `iroh_share_known_peers`. | `main.rs:806-818` | Remove the real keys. |
 | m4 | `getrandom` dependency unused (cargo warning). | `Cargo.toml:10` | Drop it. |
 
 ---
