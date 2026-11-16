@@ -32,8 +32,15 @@ jobs:
         with:
           key: wasm-release
 
+      - name: Install cargo-binstall
+        uses: cargo-bins/cargo-binstall@main
+
       - name: Install dioxus-cli
-        run: cargo install dioxus-cli --version 0.7.10
+        # binstall downloads the prebuilt `dx` binary from the GitHub release;
+        # fall back to a from-source build if the assets are ever unavailable.
+        run: |
+          cargo binstall dioxus-cli --version 0.7.10 --no-confirm \
+            || cargo install dioxus-cli --version 0.7.10
 
       - name: Install wasm-bindgen-cli
         uses: jetli/wasm-bindgen-action@v0.2.0
