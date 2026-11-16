@@ -56,7 +56,9 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          # dioxus-cli 0.7 writes the web build to target/dx/<app>/<profile>/web/public
+          # instead of the `dist` output dir used by 0.6 and earlier.
+          path: target/dx/slopwise/release/web/public
 
   deploy:
     needs: build
